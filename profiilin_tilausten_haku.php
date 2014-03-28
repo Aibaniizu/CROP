@@ -8,7 +8,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
 function haeTilausKannasta($db, $getid) {
     $sql = <<<SQLEND
-SELECT maksutapa,sukunimi,nimi FROM Asiakkaan_lippu JOIN Tilaus ON (Asiakkaan_lippu.tilausnumero = Tilaus.tilausnumero) JOIN Kayttaja ON (Kayttaja_sahkoposti = Kayttaja.sahkoposti) INNER JOIN Tapahtuma ON (Tapahtuma.tapahtumaID = Asiakkaan_lippu.tapahtumaID) WHERE Kayttaja.sahkoposti='testi@testi.fi'
+SELECT tilausnumero, paivamaara, toimitustapa, maksutapa FROM Kayttaja LEFT JOIN Tilaus ON (sahkoposti = Kayttaja_sahkoposti) WHERE sahkoposti=:getid
 SQLEND;
  
    $stmt = $db->prepare("$sql");
@@ -23,9 +23,10 @@ echo "    <td>Maksutapa</td>";
 echo "	</tr>";
 */
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+echo "tere";
     $output = <<<OUTPUTEND
     <tr>
-    <td>{$row['maksutapa']}</td><td>{$row['sukunimi']}</td><td>{$row['nimi']}</td>
+    <td>{$row['tilausnumero']}</td><td>{$row['paivamaara']}</td><td>{$row['maksutapa']}</td>
     
    </tr>
 OUTPUTEND;
