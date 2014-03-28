@@ -1,5 +1,5 @@
 ﻿<?php
-// $_GET['id'] tietoa haetaan
+//session_start();
 require_once('db-init.php'); //require jos ohjelman ei haluta jatkavat jos ei onnistu ottamaan "yhteytta"
 include_once('navbar.php');
  
@@ -15,6 +15,8 @@ $getphone = $_GET['puhelinnumero'];
 $getuid = $_GET['opiskelijatunnus'];
 $getcampus = $_GET['kampus'];
 $getinfo = $_GET['lisatiedot'];
+ 
+
  
 $stmt = tallennaKantaan($db, $getid, $getfname, $getlname, $getaddr, $getpostnmb, $getpostplace, $getphone, $getuid, $getcampus, $getinfo);
 $stmt2 = haekannasta($db, $getid);
@@ -41,6 +43,13 @@ SQLEND;
    $stmt2->execute();
    return $stmt2;    
 }
+
+
+header("Location: http://" . $_SERVER['HTTP_HOST']
+                           . dirname($_SERVER['PHP_SELF']) . '/'
+                           . "profiilin_tiedot.php"); 
+
+setcookie ("succeed", "Tietojen tallennus onnistui!", time()+86400);
  
 ?>
 

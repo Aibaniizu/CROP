@@ -1,0 +1,10 @@
+SELECT tilausnumero, paivamaara, toimitustapa, maksutapa FROM Kayttaja LEFT JOIN Tilaus ON (sahkoposti = Kayttaja_sahkoposti) WHERE sahkoposti = 
+
+SELECT maksutapa,sukunimi,nimi FROM Asiakkaan_lippu AS a JOIN Tilaus AS t ON (a.tilausnumero = t.tilausnumero) JOIN Kayttaja AS k ON (t.Kayttaja_sahkoposti = k.sahkoposti) INNER JOIN Tapahtuma AS tp ON (tp.tapahtumaID = a.tapahtumaID);
+
+
+
+
+*************************************
+	SELECT tilausnumero, paivamaara, toimitustapa, maksutapa FROM Kayttaja LEFT JOIN Tilaus ON (sahkoposti = Kayttaja_sahkoposti) WHERE sahkoposti=:getid
+SQLEND;

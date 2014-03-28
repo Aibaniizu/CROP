@@ -5,6 +5,10 @@ tr:nth-child(1) {background: #ffeedd}
 </style>
 
 <?php
+session_start();
+
+
+
 include_once('navbar.php');
 require_once('db-init.php');
 
@@ -26,6 +30,7 @@ SQLEND;
 
 ?>
 <h1>Muokkaa tietoja:</h1>
+
 <form method='get' action='profiilin_muokkauksen_tallennus.php'> 
 <table border='0' cellpadding='5'>
 <tr valign='top'>
@@ -71,4 +76,5 @@ SQLEND;
 </tr>
 </table>
 <input type='submit' name='action' value='Tallenna muutokset' onclick="javascript: return confirm('Hyväksy tallennus?')"><br>
+<input type='submit' name='action' value='Peruuta'><br>
 </form>

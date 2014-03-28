@@ -5,8 +5,12 @@ tr:nth-child(1) {background: #ffeedd}
 </style>
 
 <?php
+//session_start();
+
 include_once('navbar.php');
 require_once('db-init.php');
+
+$msg = isset($_COOKIE['succeed']) ? $_COOKIE['succeed'] : '';
 
 $getid = 'testi@testi.fi';
 $stmt = haeHenkiloKannasta ($db, $getid);
@@ -26,7 +30,8 @@ SQLEND;
 
 ?>
 <h1>Hei <?php echo $row['etunimi'] ?>! </h1>
-<form method='get' action='profiilin_muokkaus.php'> 
+<p><?php echo $msg ?></p>
+<form method='get' action='profiilin_ohjaussivu.php'> 
 <table border='0' cellpadding='5'>
 <tr valign='top'>
   <td align='right' bgcolor='#ffeedd'>Sähköposti (tunnus)</td>
@@ -39,7 +44,7 @@ SQLEND;
 </tr>
 <tr valign='top'>
   <td align='right' bgcolor='#ffeedd'>Etunimi</td>
-  <td><<?php echo $row['etunimi'] ?></td>
+  <td><?php echo $row['etunimi'] ?></td>
 </tr>
 <tr valign='top'>
   <td align='right' bgcolor='#ffeedd'>Katuosoite</td>
@@ -71,4 +76,9 @@ SQLEND;
 </tr>
 </table>
 <input type='submit' name='action' value='Muokkaa tietoja'><br>
+<input type='submit' name='action' value='Tilaushistoria'><br>
 </form>
+
+<?php
+ setcookie('succeed');
+?>
