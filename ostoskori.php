@@ -1,4 +1,7 @@
 ﻿<?php
+include_once('navbar.php');
+require_once('db-init.php');
+
 session_start();
 
 $vw_lkm = isset($_SESSION['vw_lkm']) ? $_SESSION['vw_lkm'] : 0;
@@ -21,12 +24,12 @@ $_SESSION['vw_lkm'] = $vw_lkm;
 
 ?>
    <form method="POST" action="<?php echo "{$_SERVER['PHP_SELF']}"?>">
-   
-   <input type="submit" value="Vahvista tilaus" name="vahvista">
    <input type="submit" value="Tyhjennä ostoskori" name="tyhjaa">
    </form>
 
-
+   <form method="POST" action="<?php echo "{$_SERVER['PHP_SELF']}"?>">
+   <input type="submit" value="Vahvista tilaus" name="vahvista">
+   </form>
 
 <?php
 // h3t2-autolaskuri-sessio.php
