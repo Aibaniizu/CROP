@@ -1,6 +1,6 @@
 ﻿<?php
 include_once('navbar.php');
-require_once('db-init.php');
+//require_once('db-init.php');
 
 session_start();
 
@@ -27,7 +27,7 @@ $_SESSION['vw_lkm'] = $vw_lkm;
    <input type="submit" value="Tyhjennä ostoskori" name="tyhjaa">
    </form>
 
-   <form method="POST" action="<?php echo "{$_SERVER['PHP_SELF']}"?>">
+   <form method="POST" action="ostoskori_tilauksen_vahvistus.php">
    <input type="submit" value="Vahvista tilaus" name="vahvista">
    </form>
 
