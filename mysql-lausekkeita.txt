@@ -8,3 +8,12 @@ SELECT maksutapa,sukunimi,nimi FROM Asiakkaan_lippu AS a JOIN Tilaus AS t ON (a.
 *************************************
 	SELECT tilausnumero, paivamaara, toimitustapa, maksutapa FROM Kayttaja LEFT JOIN Tilaus ON (sahkoposti = Kayttaja_sahkoposti) WHERE sahkoposti=:getid
 SQLEND;
+
+******************************
+SELECT maksutapa,sukunimi,nimi FROM Asiakkaan_lippu AS a JOIN Tilaus AS t ON (a.tilausnumero = t.tilausnumero) JOIN Kayttaja AS k ON (t.Kayttaja_sahkoposti = k.sahkoposti) INNER JOIN Tapahtuma AS tp ON (tp.tapahtumaID = a.tapahtumaID) WHERE k.sahkoposti = 'testi@testi.fi'
+
+************
+SELECT nimi, ajankohta, lipunhinta, etunimi, tilausnumero FROM Tapahtuma, Kayttaja, Tilaus WHERE sahkoposti='testi@testi.fi'
+**************
+
+SELECT * FROM Tilaus LEFT JOIN Asiakkaan_lippu ON (Tilaus.tilausnumero = Asiakkaan_lippu.tilausnumero) WHERE Kayttaja_sahkoposti='testi@testi.fi';

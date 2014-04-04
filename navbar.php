@@ -8,4 +8,5 @@
 [ <a href='profiilin_tiedot.php'> Oma profiili </a> ]
 
 <p>Haku: </p> <input type='text' size='10' name='hakuehto' value=''>
+<input type='submit' value='Hae'>
 </form>

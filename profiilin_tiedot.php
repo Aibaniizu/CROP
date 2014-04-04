@@ -1,7 +1,7 @@
-﻿<style type='text/css'>
-tr:nth-child(odd) {background: #f1f1f1}
+<style type='text/css'>
+tr:nth-child(odd) {background: #749FA9}
 tr:nth-child(even) {background: #ffffff}
-tr:nth-child(1) {background: #ffeedd}
+tr:nth-child(1) {background: #749FA9}
 </style>
 
 <?php
@@ -34,44 +34,44 @@ SQLEND;
 <form method='get' action='profiilin_ohjaussivu.php'> 
 <table border='0' cellpadding='5'>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Sähköposti (tunnus)</td>
+  <td align='right' bgcolor='#BEDBE2'>Sähköposti (tunnus)</td>
   <td><?php echo $row['sahkoposti'] ?></td>
   <input type='hidden' name='id' size='30' value='<?php echo $row['sahkoposti'] ?>'>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Sukunimi</td>
+  <td align='right' bgcolor='#BEDBE2'>Sukunimi</td>
   <td><?php echo $row['sukunimi'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Etunimi</td>
+  <td align='right' bgcolor='#BEDBE2'>Etunimi</td>
   <td><?php echo $row['etunimi'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Katuosoite</td>
+  <td align='right' bgcolor='#BEDBE2'>Katuosoite</td>
   <td><?php echo $row['katuosoite'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Postinumero</td>
+  <td align='right' bgcolor='#BEDBE2'>Postinumero</td>
   <td><?php echo $row['postinumero'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Postitoimipaikka</td>
+  <td align='right' bgcolor='#BEDBE2'>Postitoimipaikka</td>
   <td><?php echo $row['postitoimipaikka'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Puhelinnumero</td>
+  <td align='right' bgcolor='#BEDBE2'>Puhelinnumero</td>
   <td><?php echo $row['puhelinnumero'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Opiskelijatunnus</td>
+  <td align='right' bgcolor='#BEDBE2'>Opiskelijatunnus</td>
   <td><?php echo $row['opiskelijatunnus'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Kampus</td>
+  <td align='right' bgcolor='#BEDBE2'>Kampus</td>
   <td><?php echo $row['kampus'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Lisätiedot</td>
+  <td align='right' bgcolor='#BEDBE2'>Lisätiedot</td>
   <td><?php echo $row['lisatiedot'] ?></td>
 </tr>
 </table>

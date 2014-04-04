@@ -1,0 +1,92 @@
+﻿<?php
+// $_GET['id'] tietoa haetaan
+require_once('db-init.php'); //require jos ohjelman ei haluta jatkavat jos ei onnistu ottamaan "yhteytta"
+include_once('navbar.php');
+ 
+//muuuttujat talteen linkista
+$getid = $_GET['id'];
+$getfname = $_GET['etunimi'];
+$getlname = $_GET['sukunimi'];
+$getaddr = $_GET['osoite'];
+$getphone = $_GET['puhnro'];
+$getemail = $_GET['email'];
+ 
+$stmt = tallennaKantaan($db, $getid, $getfname, $getlname, $getaddr, $getphone, $getemail);
+$stmt2 = haekannasta($db, $getid);
+$row=$stmt2->fetch(PDO::FETCH_ASSOC);
+ 
+function tallennaKantaan($db, $getid, $getfname, $getlname, $getaddr, $getphone, $getemail) {
+    $sql = <<<SQLEND
+    UPDATE henkilot SET sukunimi=?, etunimi=?, osoite=?, puhnro=?, email=? WHERE tunnus=?
+SQLEND;
+     
+   $stmt = $db->prepare("$sql");
+   //$stmt->bindValue(':getid', "$getid", PDO::PARAM_STR);
+   $stmt->execute(array($getlname, $getfname, $getaddr, $getphone, $getemail, $getid));
+   return $stmt;    
+}
+ 
+function haekannasta($db, $getid) {
+   $sql = <<<SQLEND
+   SELECT tunnus, sukunimi, etunimi, email, osoite, puhnro
+   FROM henkilot WHERE tunnus=:getid;
+SQLEND;
+ 
+   $stmt2 = $db->prepare("$sql");
+   $stmt2->bindValue(':getid', "$getid", PDO::PARAM_STR);
+   $stmt2->execute();
+   return $stmt2;    
+}
+ 
+?>
+<style type='text/css'>
+tr:nth-child(odd) {background: #f1f1f1}
+tr:nth-child(even) {background: #ffffff}
+tr:nth-child(1) {background: #ffeedd}
+</style>
+
+<form method='get' action=''> 
+<table border='0' cellpadding='5'>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Sähköposti (tunnus)</td>
+  <td><?php echo $row['sahkoposti'] ?></td>
+  <input type='hidden' name='id' size='30' value='<?php echo $row['sahkoposti'] ?>'>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Sukunimi</td>
+  <td><input type='text' name='sukunimi' size='30' value='<?php echo $row['sukunimi'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Etunimi</td>
+  <td><input type='text' name='etunimi' size='30' value='<?php echo $row['etunimi'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Katuosoite</td>
+  <td><input type='text' name='osoite' size='30' value='<?php echo $row['katuosoite'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Postinumero</td>
+  <td><input type='text' name='postinumer' size='30' value='<?php echo $row['postinumero'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Postitoimipaikka</td>
+  <td><input type='text' name='postitoimipaikka' size='30' value='<?php echo $row['postitoimipaikka'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Puhelinnumero</td>
+  <td><input type='text' name='puhelinnumero' size='30' value='<?php echo $row['puhelinnumero'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Opiskelijatunnus</td>
+  <td><input type='text' name='opiskelijatunnus' size='30' value='<?php echo $row['opiskelijatunnus'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Kampus</td>
+  <td><input type='text' name='kampus' size='30' value='<?php echo $row['kampus'] ?>'></td>
+</tr>
+<tr valign='top'>
+  <td align='right' bgcolor='#ffeedd'>Lisätiedot</td>
+  <td><input type='text' name='lisatiedot' size='30' value='<?php echo $row['lisatiedot'] ?>'></td>
+</tr>
+
+</form>

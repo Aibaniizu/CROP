@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //session_start();
 require_once('db-init.php'); //require jos ohjelman ei haluta jatkavat jos ei onnistu ottamaan "yhteytta"
 include_once('navbar.php');
@@ -45,63 +45,64 @@ SQLEND;
 }
 
 
-header("Location: http://" . $_SERVER['HTTP_HOST']
+/*header("Location: http://" . $_SERVER['HTTP_HOST']
                            . dirname($_SERVER['PHP_SELF']) . '/'
-                           . "profiilin_tiedot.php"); 
+                           . "profiilin_tiedot.php"); */
 
 setcookie ("succeed", "Tietojen tallennus onnistui!", time()+86400);
  
 ?>
 
 <style type='text/css'>
-tr:nth-child(odd) {background: #f1f1f1}
+tr:nth-child(odd) {background: #749FA9}
 tr:nth-child(even) {background: #ffffff}
-tr:nth-child(1) {background: #ffeedd}
+tr:nth-child(1) {background: #749FA9}
 </style>
 
 <h1>Tietosi tallennettiin onnistuneesti! </h1>
-<form method='get' action=''> 
+<form method='get' action='profiilin_ohjaussivu.php'> 
 <table border='0' cellpadding='5'>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Sähköposti (tunnus)</td>
+  <td align='right' bgcolor='#749FA9'>Sähköposti (tunnus)</td>
   <td><?php echo $row['sahkoposti'] ?></td>
   <input type='hidden' name='id' size='30' value='<?php echo $row['sahkoposti'] ?>'>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Sukunimi</td>
+  <td align='right' bgcolor='#749FA9'>Sukunimi</td>
   <td><?php echo $row['sukunimi'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Etunimi</td>
+  <td align='right' bgcolor='#749FA9'>Etunimi</td>
   <td><?php echo $row['etunimi'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Katuosoite</td>
+  <td align='right' bgcolor='#749FA9'>Katuosoite</td>
   <td><?php echo $row['katuosoite'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Postinumero</td>
+  <td align='right' bgcolor='#749FA9'>Postinumero</td>
   <td><?php echo $row['postinumero'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Postitoimipaikka</td>
+  <td align='right' bgcolor='#749FA9'>Postitoimipaikka</td>
   <td><?php echo $row['postitoimipaikka'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Puhelinnumero</td>
+  <td align='right' bgcolor='#749FA9'>Puhelinnumero</td>
   <td><?php echo $row['puhelinnumero'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Opiskelijatunnus</td>
+  <td align='right' bgcolor='#749FA9'>Opiskelijatunnus</td>
   <td><?php echo $row['opiskelijatunnus'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Kampus</td>
+  <td align='right' bgcolor='#749FA9'>Kampus</td>
   <td><?php echo $row['kampus'] ?></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Lisätiedot</td>
+  <td align='right' bgcolor='#749FA9'>Lisätiedot</td>
   <td><?php echo $row['lisatiedot'] ?></td>
 </tr>
 
+<input type='submit' name='action' value='Jatka'/>
 </form>

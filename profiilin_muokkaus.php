@@ -1,18 +1,18 @@
-﻿<style type='text/css'>
-tr:nth-child(odd) {background: #f1f1f1}
+<style type='text/css'>
+tr:nth-child(odd) {background: #749FA9}
 tr:nth-child(even) {background: #ffffff}
-tr:nth-child(1) {background: #ffeedd}
+tr:nth-child(1) {background: #749FA9}
 </style>
 
 <?php
 session_start();
 
-
+$msg = isset($_SESSION['succeed']) ? $_SESSION['succeed'] : 'kissa';
 
 include_once('navbar.php');
 require_once('db-init.php');
 
-$getid = 'testi@testi.fi';
+$getid = $_GET['id'];
 $stmt = haeHenkiloKannasta ($db, $getid);
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -34,44 +34,44 @@ SQLEND;
 <form method='get' action='profiilin_muokkauksen_tallennus.php'> 
 <table border='0' cellpadding='5'>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Sähköposti (tunnus)</td>
+  <td align='right' bgcolor='#749FA9'>Sähköposti (tunnus)</td>
   <td><?php echo $row['sahkoposti'] ?></td>
   <input type='hidden' name='id' size='30' value='<?php echo $row['sahkoposti'] ?>'>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Sukunimi</td>
+  <td align='right' bgcolor='#749FA9'>Sukunimi</td>
   <td><input type='text' name='sukunimi' size='30' value='<?php echo $row['sukunimi'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Etunimi</td>
+  <td align='right' bgcolor='#749FA9'>Etunimi</td>
   <td><input type='text' name='etunimi' size='30' value='<?php echo $row['etunimi'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Katuosoite</td>
+  <td align='right' bgcolor='#749FA9'>Katuosoite</td>
   <td><input type='text' name='osoite' size='30' value='<?php echo $row['katuosoite'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Postinumero</td>
+  <td align='right' bgcolor='#749FA9'>Postinumero</td>
   <td><input type='text' name='postinumero' size='30' value='<?php echo $row['postinumero'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Postitoimipaikka</td>
+  <td align='right' bgcolor='#749FA9'>Postitoimipaikka</td>
   <td><input type='text' name='postitoimipaikka' size='30' value='<?php echo $row['postitoimipaikka'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Puhelinnumero</td>
+  <td align='right' bgcolor='#749FA9'>Puhelinnumero</td>
   <td><input type='text' name='puhelinnumero' size='30' value='<?php echo $row['puhelinnumero'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Opiskelijatunnus</td>
+  <td align='right' bgcolor='#749FA9'>Opiskelijatunnus</td>
   <td><input type='text' name='opiskelijatunnus' size='30' value='<?php echo $row['opiskelijatunnus'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Kampus</td>
+  <td align='right' bgcolor='#749FA9'>Kampus</td>
   <td><input type='text' name='kampus' size='30' value='<?php echo $row['kampus'] ?>'></td>
 </tr>
 <tr valign='top'>
-  <td align='right' bgcolor='#ffeedd'>Lisätiedot</td>
+  <td align='right' bgcolor='#749FA9'>Lisätiedot</td>
   <td><input type='text' name='lisatiedot' size='30' value='<?php echo $row['lisatiedot'] ?>'></td>
 </tr>
 </table>
