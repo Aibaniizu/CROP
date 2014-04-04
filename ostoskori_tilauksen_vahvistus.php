@@ -1,6 +1,6 @@
 ﻿<?php
 include_once('navbar.php');
-//require_once('db-init.php');
+require_once('db-init.php');
 // if blah blah
 echo "Tilauksenne on vastaanotettu.";
 echo "Tilauksen käsittelyssä tapahtui ongelma.";
