@@ -1,16 +1,35 @@
 ﻿<?php
+include_once('navbar.php');
+//require_once('db-init.php');
+
 session_start();
 
 $vw_lkm = isset($_SESSION['vw_lkm']) ? $_SESSION['vw_lkm'] : 0;
-
+/*
 if(){
 $_SESSION['vw_lkm'] = $vw_lkm;
 }
+*/
+
+//GET sessiosta tilattavien lippujen tapahtumien 
+//tunnukset, 
+//lippujen määrä, 
+//ostorajoitus, jos liikaa lippuja herjaa jotain
+//vahvista tilaus -> toiseen näkymään
+//					 tallenna tilaus tietokantaan
+//					 ilmoita asikkaalle tilauksen onnistumisesta
+// tyhjennä sessio, jos tilaus vahvistettu tai ostoskori tyhjennetty
+
+//toiseen tiedostoon -> tiedot saaduista tilauksista tapahtuma pvm mukaan(?), graafi (y)
 
 ?>
+   <form method="POST" action="<?php echo "{$_SERVER['PHP_SELF']}"?>">
+   <input type="submit" value="Tyhjennä ostoskori" name="tyhjaa">
+   </form>
 
-
-
+   <form method="POST" action="ostoskori_tilauksen_vahvistus.php">
+   <input type="submit" value="Vahvista tilaus" name="vahvista">
+   </form>
 
 <?php
 // h3t2-autolaskuri-sessio.php
