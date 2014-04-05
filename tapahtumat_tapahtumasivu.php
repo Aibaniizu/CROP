@@ -47,7 +47,6 @@ $tapahtuma = <<<END
 		<p>Kuka järkkää? $jarjestaja</p></br>
 		<p>Missä? $paikka</p></br>
 		<p>Paljon maksaa? $lipunhinta €/kpl</p></br>
-		<img src="lataaKuva.php?id=$id" width="300" height="300">
 		<input type='number' name='maara' min='1' max='$lippuostorajoitus'>kpl
 		<input type='submit' name='osta' value='Osta'>
 	</form>
