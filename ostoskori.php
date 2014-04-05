@@ -10,15 +10,16 @@ if(isset($_SESSION['osto']) && !empty($_SESSION['osto'])) {
 	//käy läpi session sisällön
 	foreach ($_SESSION['osto'] as $tilausrivi) {
 	foreach ($tilausrivi AS	$kentta => $arvo) {
-	    echo "$kentta: $arvo <br>"
+	    echo "$kentta: $arvo <br>";
 	}
 	}
 	
 	naytaNappulat();
 }
 
-if(){
-
+if(isset($_GET['tyhjaa'])){
+	//$_SESSION['osto'][] = array();
+	//session_destroy();
 }
 
 
@@ -29,27 +30,20 @@ function naytaNappulat(){
    <input type="submit" value="Tyhjennä ostoskori" name="tyhjaa">
    </form>
 
-   <form method="POST" action="ostoskori_tilauksen_vahvistus.php">
-   <input type="submit" value="Vahvista tilaus" name="vahvista">
+   <form method="POST" action="ostoskori_tilauksen_tiedot.php">
+   <input type="submit" value="Siirry kassalle" name="siirry">
    </form>
 
 <?php
 }
 
-function sessionLoppu(){
-	session_destroy();
-}
 
 
 //GET sessiosta tilattavien lippujen tapahtumien 
 //tunnukset, 
 //lippujen määrä, 
-//ostorajoitus, jos liikaa lippuja herjaa jotain
-//vahvista tilaus -> toiseen näkymään
-//					 lomake, josta näkee omat tiedot + toimitustapa, maksutapa, lisätiedot
-//					 hae tilaus pvm
-//					 	asiakkaan lippuun tilausnro, tapahtumaID
-//					 tallenna tilaus tietokantaan
+//(ostorajoitus, jos liikaa lippuja herjaa jotain) jostain pitää tarkistaa riittääkö lippuja
+
 //					 ilmoita asikkaalle tilauksen onnistumisesta
 // tyhjennä sessio, jos tilaus vahvistettu tai ostoskori tyhjennetty
 
