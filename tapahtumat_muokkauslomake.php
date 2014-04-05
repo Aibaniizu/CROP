@@ -98,7 +98,7 @@ $forms = <<<FORMSEND
   <td><input type='file' name='kuva'><td>
 </tr>
 </table>
-<input type='submit' name='action' value='Tallenna' onclick="javascript: alert('Tallennettu')"><br>
+<input type='submit' name='muokkaa' value='Tallenna'><br>
 <input type='submit' name='poista' value='Poista' onclick="javascript: return confirm('Hyväksy poisto?')">
 </form>
 

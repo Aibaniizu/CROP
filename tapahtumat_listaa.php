@@ -19,32 +19,40 @@ sqlResult2Html($stmt);
 // tapahtumien järjestys
 function haeTapahtumat($db, $hakuehto) {
 
-
-
-	
 	if(!isset($_GET['jarjestys'])) {
 	   $sql = <<<SQLEND
-	   SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
-	   FROM Tapahtuma WHERE tapahtumaID
-	   LIKE :hakuehto
+		   SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+		   FROM Tapahtuma WHERE tapahtumaID
+		   LIKE :hakuehto
 SQLEND;
 	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
 		$sql = <<<SQLEND
-			 SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
 			LIKE :hakuehto 
-			ORDER BY tapahtumaID
+			ORDER BY tapahtumaID ASC
 SQLEND;
+	
+	
+	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
+		$sql = <<<SQLEND
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			FROM Tapahtuma WHERE tapahtumaID
+			LIKE :hakuehto 
+			ORDER BY tapahtumaID DESC
+SQLEND;
+	$AD = true;
+	
 	}else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'Tapahtuma') {
 		$sql = <<<SQLEND
-			 SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
 			LIKE :hakuehto 
 			ORDER BY nimi
 SQLEND;
 	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'Ajankohta') {
 		$sql = <<<SQLEND
-			 SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
 			LIKE :hakuehto 
 			ORDER BY ajankohta
@@ -58,21 +66,21 @@ SQLEND;
 SQLEND;
 	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'Kuvaus') {
 		$sql = <<<SQLEND
-			 SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
 			LIKE :hakuehto 
 			ORDER BY kuvaus
 SQLEND;
 	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'Paikka') {
 		$sql = <<<SQLEND
-			 SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
 			LIKE :hakuehto 
 			ORDER BY paikka
 SQLEND;
 	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'Hinta') {
 		$sql = <<<SQLEND
-			 SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
+			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
 			LIKE :hakuehto 
 			ORDER BY lipunhinta
