@@ -2,8 +2,7 @@
 	session_start();
 	require_once('db-init.php');
 	include_once('navbar.php');
-	include_once('tapahtumat_muokkaa.php');
-	//include_once('abook-poista.php');
+
 	
 	alustaKanta($db);
 	
