@@ -3,7 +3,7 @@
 	
 	// HUOM! HUOM! oon lisänny tämän mysqli-lauseen omaan db-inttiini, tässä tiedostossa ei jostain syystä
 	// toimi db-initin lisääminen, tutkin asiaa...  	
-	$mysqli = new mysqli('mysql.labranet.jamk.fi', 'G7753', 'o1Oi0eYGFPlRCazzXi1IIV4ai0F1tEGU', 'G7753');
+	$mysqli = new mysqli('mysql.labranet.jamk.fi', 'G7753', 'salasanasi tähän', 'G7753');
 	// host, user, password, database
 	
 	$id = $_GET['id'];
