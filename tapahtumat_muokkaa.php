@@ -2,8 +2,8 @@
 	$id = $_GET['id'];
 	require_once('db-init.php');
 	
-	$result = $mysqli->query('SELECT kuva FROM Tapahtuma WHERE tapahtumaID=' . addslashes($id) . ';');
-	$row = $result->fetch_assoc();
+	$result = $db->query('SELECT kuva FROM Tapahtuma WHERE tapahtumaID=' . addslashes($id) . ';');
+	$row = $result->fetch(PDO::FETCH_ASSOC);
 	
 	if (isset($_POST['muokkaa'])) {
 		$nimi = $_POST['nimi'];

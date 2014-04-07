@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once('db-init.php');
 	include_once('navbar.php');
 	include_once('tapahtumat_lisaa.php');
@@ -45,6 +46,7 @@ $forms = <<<FORMSEND
 <tr valign='top'>
 	<td align='right' bgcolor='#ffeedd'>Kuva</td>
 	<td><input type="file" name="kuva"></td>
+	Huom! Kuvan tulee olla 150x150px
 </tr>
 </table>
 <input type='submit' name='tallenna' value='Tallenna' ><br>

@@ -6,7 +6,7 @@ tr:nth-child(1) {background: #ffeedd}
 
 <?php
 // mysql-pdo-search.php
-
+session_start();
 require_once('db-init.php');
 include_once('navbar.php');
 
@@ -15,6 +15,13 @@ $hakuehto = isset($_GET['hakuehto']) ? $_GET['hakuehto'] : '';
 $stmt = haeTapahtumat($db, $hakuehto);
 sqlResult2Html($stmt);
 
+if (isset($_GET['valitse'])) {
+	$_SESSION['taso'] = $_GET['tasot'];
+	flush();
+	$aika = time();
+    header("Location: http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?$aika");
+} 
+$taso = $_SESSION['taso'];
 
 // tapahtumien järjestys
 function haeTapahtumat($db, $hakuehto) {
@@ -25,7 +32,7 @@ function haeTapahtumat($db, $hakuehto) {
 		   FROM Tapahtuma WHERE tapahtumaID
 		   LIKE :hakuehto
 SQLEND;
-	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
+	} /*else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
 		$sql = <<<SQLEND
 			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
@@ -34,7 +41,7 @@ SQLEND;
 SQLEND;
 	
 	
-	} else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
+	}*/ else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
 		$sql = <<<SQLEND
 			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma WHERE tapahtumaID
@@ -95,38 +102,65 @@ SQLEND;
 
 // SQL-kyselyn tulosjoukko HTML-taulukkoon.
 function sqlResult2Html($stmt) {
+	$taso = $_SESSION['taso'];
+	$row_count = $stmt->rowCount();
+	$col_count  = $stmt->columnCount();
 
-$row_count = $stmt->rowCount();
-$col_count  = $stmt->columnCount();
-
-echo "Hakutulokset:" . $row_count. " riviä:<hr>\n";
-echo "<table border='0'>\n";    
-// yläpalkki
-$output = <<<OUTPUTEND
-<tr bgcolor='#ffeedd'>
-<td><a href='tapahtumat_listaa.php?jarjestys=TapahtumaID'>TapahtumaID</a></td>
-<td><a href='tapahtumat_listaa.php?jarjestys=Tapahtuma'>Tapahtuma</a></td>
-<td><a href='tapahtumat_listaa.php?jarjestys=Ajankohta'>Ajankohta</a></td>
-<td><a href='tapahtumat_listaa.php?jarjestys=Jarjestaja'>Järjestäjä</a></td>
-<td><a href='tapahtumat_listaa.php?jarjestys=Kuvaus'>Kuvaus</a></td>
-<td><a href='tapahtumat_listaa.php?jarjestys=Paikka'>Paikka</a></td>
-<td><a href='tapahtumat_listaa.php?jarjestys=Hinta'>Hinta</a></td>
-</tr>
+	echo "Hakutulokset:" . $row_count. " riviä:<hr>\n";
+	echo "<table border='0'>\n";    
+	// yläpalkki
+	if ($taso >= 2) {
+	$output = <<<OUTPUTEND
+		<tr bgcolor='#ffeedd'>
+			<td>Kuva</td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Tapahtuma'>Tapahtuma</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Ajankohta'>Ajankohta</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Jarjestaja'>Järjestäjä</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Kuvaus'>Kuvaus</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Paikka'>Paikka</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Hinta'>Hinta</a></td>
+			<td>Muokkaa</td>
+		</tr>
 OUTPUTEND;
+	} else {
+		$output = <<<OUTPUTEND
+		<tr bgcolor='#ffeedd'>
+			<td>Kuva</td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Tapahtuma'>Tapahtuma</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Ajankohta'>Ajankohta</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Jarjestaja'>Järjestäjä</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Kuvaus'>Kuvaus</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Paikka'>Paikka</a></td>
+			<td><a href='tapahtumat_listaa.php?jarjestys=Hinta'>Hinta</a></td>
+		</tr>
+OUTPUTEND;
+}
 echo $output;
 
 // tapahtumat
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $muokkaus_linkki = "<a href='tapahtumat_muokkauslomake.php?id={$row['tapahtumaID']}'>{$row['tapahtumaID']}</a>";
+	$taso = $_SESSION['taso'];
+    $muokkaus_linkki = "<a href='tapahtumat_muokkauslomake.php?id={$row['tapahtumaID']}'>Muokkaa</a>";
 	$tapahtuma_linkki = "<a href='tapahtumat_tapahtumasivu.php?id={$row['tapahtumaID']}'>{$row['nimi']}</a>";
-	$output = <<<OUTPUTEND
-    <tr>
-    <td>$muokkaus_linkki</td><td>$tapahtuma_linkki</td><td>{$row['ajankohta']}</td>
-    <td>{$row['jarjestaja']}</td><td>{$row['kuvaus']}</td><td>{$row['paikka']}</td>
-	<td>{$row['lipunhinta']}</td>
-   </tr>
+	if ($taso >= 2) {
+		$output = <<<OUTPUTEND
+			<tr>
+				<td><img src="lataaKuva.php?id={$row['tapahtumaID']}" width="50" height="50"></td><td>$tapahtuma_linkki</td><td>{$row['ajankohta']}</td>
+				<td>{$row['jarjestaja']}</td><td>{$row['kuvaus']}</td><td>{$row['paikka']}</td>
+				<td>{$row['lipunhinta']}</td> <td>$muokkaus_linkki</td>
+		   </tr>
 OUTPUTEND;
+	} else {
+		$output = <<<OUTPUTEND
+			<tr>
+				<td><img src="lataaKuva.php?id={$row['tapahtumaID']}" width="50" height="50"></td><td>$tapahtuma_linkki</td><td>{$row['ajankohta']}</td>
+				<td>{$row['jarjestaja']}</td><td>{$row['kuvaus']}</td><td>{$row['paikka']}</td>
+				<td>{$row['lipunhinta']}</td>
+		   </tr>
+OUTPUTEND;
+	}
     echo $output;
+	
 }
 echo "</table>\n";
 }

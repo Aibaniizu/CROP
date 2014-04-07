@@ -22,7 +22,7 @@ SQLEND;
 
 
 <?php
-	
+	session_start();
 	require_once('db-init.php');
 	include_once('navbar.php');
 	include_once('tapahtumat_muokkaa.php');
@@ -96,6 +96,7 @@ $forms = <<<FORMSEND
   <td align='right' bgcolor='#ffeedd'>Kuva</td>
   <td><img src='lataaKuva.php?id=$id' ></td>
   <td><input type='file' name='kuva'><td>
+  Huom! Kuvan tulee olla 150x150px
 </tr>
 </table>
 <input type='submit' name='muokkaa' value='Tallenna'><br>
