@@ -75,6 +75,7 @@ END;
 }
 echo $tapahtuma;
 
+
 }
 
 if (isset($_POST['osta'])) {

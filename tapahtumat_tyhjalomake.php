@@ -46,7 +46,7 @@ $forms = <<<FORMSEND
 <tr valign='top'>
 	<td align='right' bgcolor='#ffeedd'>Kuva</td>
 	<td><input type="file" name="kuva"></td>
-	Huom! Kuvan tulee olla 150x150px
+	Huom! Kuvan tulee olla 150x150px ||  Anna päiväys muodossa vvvv-kk-pp
 </tr>
 </table>
 <input type='submit' name='tallenna' value='Tallenna' ><br>
