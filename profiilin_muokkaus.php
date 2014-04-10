@@ -8,9 +8,13 @@ tr:nth-child(1) {background: #749FA9}
 session_start();
 
 $msg = isset($_SESSION['succeed']) ? $_SESSION['succeed'] : 'kissa';
+$error = '';
 
 include_once('navbar.php');
 require_once('db-init.php');
+
+
+if (isset($_GET['error'])) $error = "Tietojen tallennus epäonnistui, yritä uudestaan. ";
 
 $getid = $_GET['id'];
 $stmt = haeHenkiloKannasta ($db, $getid);
@@ -29,6 +33,7 @@ SQLEND;
 }
 
 ?>
+<h3><?php echo $error ?></h3>
 <h1>Muokkaa tietoja:</h1>
 
 <form method='get' action='profiilin_muokkauksen_tallennus.php'> 

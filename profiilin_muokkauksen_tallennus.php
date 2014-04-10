@@ -15,12 +15,24 @@ $getphone = $_GET['puhelinnumero'];
 $getuid = $_GET['opiskelijatunnus'];
 $getcampus = $_GET['kampus'];
 $getinfo = $_GET['lisatiedot'];
- 
 
- 
+
+if (preg_match("/[0-9]{5,5}/", "$getpostnmb") 
+	AND preg_match("/^[a-z,A-Z,ö,ä,å,Ö,Ä,Å]+$/",$getfname) 
+	AND preg_match("/^[a-z,A-Z,ö,ä,å,Ö,Ä,Å]+$/",$getlname)
+	AND preg_match("/^[a-z,A-Z,ö,ä,å,Ö,Ä,Å]+$/",$getpostplace)) {
+    
+
+
 $stmt = tallennaKantaan($db, $getid, $getfname, $getlname, $getaddr, $getpostnmb, $getpostplace, $getphone, $getuid, $getcampus, $getinfo);
 $stmt2 = haekannasta($db, $getid);
 $row=$stmt2->fetch(PDO::FETCH_ASSOC);
+
+} else {
+   header("Location: http://" . $_SERVER['HTTP_HOST']
+                           . dirname($_SERVER['PHP_SELF']) . '/'
+                           . "profiilin_muokkaus.php?id=".$getid."&error=virhe"); //voisiko laittaa sessioniin että pysyisi samat tekstit?
+} 
  
 function tallennaKantaan($db, $getid, $getfname, $getlname, $getaddr, $getpostnmb, $getpostplace, $getphone, $getuid, $getcampus, $getinfo) {
     $sql = <<<SQLEND

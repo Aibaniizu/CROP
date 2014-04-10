@@ -12,7 +12,7 @@ require_once('db-init.php');
 
 $msg = isset($_COOKIE['succeed']) ? $_COOKIE['succeed'] : '';
 
-$getid = 'testi@testi.fi';
+$getid = $_SESSION['tunnus'];
 $stmt = haeHenkiloKannasta ($db, $getid);
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -30,7 +30,7 @@ SQLEND;
 
 ?>
 <h1>Hei <?php echo $row['etunimi'] ?>! </h1>
-<p><?php echo $msg ?></p>
+<!--<p><?php echo $msg ?></p>-->
 <form method='get' action='profiilin_ohjaussivu.php'> 
 <table border='0' cellpadding='5'>
 <tr valign='top'>
