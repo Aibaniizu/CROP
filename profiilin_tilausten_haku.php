@@ -1,12 +1,13 @@
 <style type='text/css'>
-tr:nth-child(odd) {background: #BEDBE2}
-tr:nth-child(even) {background: #ffffff}
-tr:nth-child(1) {background: #BEDBE2}
+tr:nth-child(odd) {background: #AABBBF}
+tr:nth-child(even) {background: #D9E2E4}
+tr:nth-child(1) {background: #AABBBF}
 .tilaushistoria {width: 900px}
+.btn {margin-top:10px;}
 </style>
 
 <form method='get' action='profiili_listaus.php'>
-<h1>testi testi</h1>
+
 <?php
 
 $getid = $_GET['id'];
@@ -25,8 +26,8 @@ SQLEND;
 
 echo "<table border='0' class='tilaushistoria'>\n"; 
 echo "<tr>";
-echo "<td>Tilausnumero</td><td>Tapahtuma</td><td>Ajankohta</td><td>Paikka</td>";
-echo "<td>Järjestäjä</td><td>Maksutapa  </td><td>Toimitustapa</td>";
+echo "<td><b>Tilausnumero</b></td><td><b>Tapahtuma</b></td><td><b>Ajankohta</b></td><td><b>Paikka</b></td>";
+echo "<td><b>Järjestäjä</b></td><td><b>Maksutapa  </b></td><td><b>Toimitustapa</b></td>";
 echo "</tr>";
 
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -42,5 +43,5 @@ OUTPUTEND;
 echo "</table>\n";
 
 ?>
-<input type='submit' name='action' value='Peruuta'><br>
+<input type='submit' name='action' value='Peruuta' class='btn'><br>
 </form>

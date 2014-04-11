@@ -1,5 +1,5 @@
 <?php 
-/*session_start();
+//session_start();
 if (isset($_GET['action']) AND ($_GET['action'] == 'Kirjaudu')) {
 	$_SESSION['tunnus'] = $_GET['tunnus'];
 	$_SESSION['salasana'] = $_GET['salasana'];
@@ -7,7 +7,7 @@ if (isset($_GET['action']) AND ($_GET['action'] == 'Kirjaudu')) {
                            . dirname($_SERVER['PHP_SELF']) . '/'
                            . "kirjaudu_sisaan.php");
 
-}*/
+}
 
 $hakuehto = isset($_GET['hakuehto']) ? $_GET['hakuehto'] : '';
      

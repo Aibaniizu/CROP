@@ -10,7 +10,7 @@ if (isset($_POST['tunnus']) AND isset($_POST['salasana'])) {
    $salasana = $_POST['salasana'];
 
    $sql = <<<SQLEND
-   SELECT sahkoposti, salasana
+   SELECT sahkoposti, salasana, kayttajataso
    FROM Kayttaja
    WHERE sahkoposti = :tunnus AND salasana = :salasana;
 SQLEND;
@@ -20,17 +20,21 @@ SQLEND;
    $stmt->bindValue(':salasana', "$salasana", PDO::PARAM_STR);
    $stmt->execute();   
    $affected_rows = $stmt->rowCount();
+   $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($affected_rows == 1) {
 
         $_SESSION['kirjautunut'] = true;
         $_SESSION['tunnus'] = $_POST['tunnus'];
+        $_SESSION['taso'] = $row['kayttajataso'];
          header("Location: http://" . $_SERVER['HTTP_HOST']
                                     . dirname($_SERVER['PHP_SELF']) . '/'
-                                    . "profiilin_tiedot.php?tunnus=".$tunnus);
+                                    . "etusivu.php");
+                                    //. "profiilin_tiedot.php?tunnus=".$tunnus);
         exit;
     } else {
-        $_SESSION['errmsg'] = '<span style="background: yellow;">Tunnus/Salasana väärin!</span>';
+        //$_SESSION['errmsg'] = '<p>Tunnus tai salasana väärin, yritä uudelleen.</p>';
+        $error = '<p>Tunnus tai salasana väärin, yritä uudelleen.</p>';
     }
 }
 
@@ -39,4 +43,6 @@ SQLEND;
 
 <h1>Kirjautuminen epäonnistui</h1>
 
-<?php echo $_SESSION['errmsg']?>
+<?php //echo $_SESSION['errmsg']
+echo $error;
+?>

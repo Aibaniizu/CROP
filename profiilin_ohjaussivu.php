@@ -13,21 +13,21 @@ header("Location: http://" . $_SERVER['HTTP_HOST']
                            . "profiilin_muokkaus.php?id=".$id); 
 
 }
-if ($page == 'Tilaushistoria') {
+if ($page == 'Katso tilaushistoria') {
 header("Location: http://" . $_SERVER['HTTP_HOST']
                            . dirname($_SERVER['PHP_SELF']) . '/'
                            . "profiilin_tilaushistoria.php?id=".$id); 
 
 }
 if ($page == 'Peruuta') {
-setcookie('succeed');
+//setcookie('succeed');
 header("Location: http://" . $_SERVER['HTTP_HOST']
                            . dirname($_SERVER['PHP_SELF']) . '/'
                            . "profiilin_tiedot.php?id=".$id); 
 
 }
 if ($page == 'Jatka') {
-setcookie('succeed');
+//setcookie('succeed');
 header("Location: http://" . $_SERVER['HTTP_HOST']
                            . dirname($_SERVER['PHP_SELF']) . '/'
                            . "profiilin_tiedot.php?id=".$id); 
