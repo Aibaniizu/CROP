@@ -1,32 +1,8 @@
-﻿<!-- Haluan muokata tätä tietuetta: $_GET['id']
-
-// Haen sen kannasta, helppoa: 
-
-$sql = <<<SQLEND
-   SELECT tunnus, sukunimi, etunimi, email, osoite, puhnro
-   FROM henkilot WHERE tunnus = $_GET['id']
-SQLEND; 
-
-// Haetaan se YKSI rivi
-
-// Sieltä tulee $row[]-taulu
-
-// Laitetaan row:n kentät lomakkeeseen
-// katso ensimmäinen esimerkki: 
-
-
-// muokkauksessa katso esimerkkiä http://student.labranet.jamk.fi/~ara/iim50300/06-2014-vko-07/osoitekirja-basic-old-fashioned/dir.php?action=show&fiilu=muokkaa.php
-// vanhaa muotoa, pitää muuttaa uuteen muotoon
--->
-
-
-
-<?php
-	
+﻿<?php
+	session_start();
 	require_once('db-init.php');
 	include_once('navbar.php');
 	include_once('tapahtumat_muokkaa.php');
-	//include_once('abook-poista.php');
 	
 	alustaKanta($db);
 	
@@ -63,6 +39,7 @@ $forms = <<<FORMSEND
 <tr valign='top'>
   <td align='right' bgcolor='#ffeedd'>Ajankohta</td>
   <td><input type='text' name='ajankohta' size='30' value='{$row['ajankohta']}'></td>
+  Anna päiväys muodossa vvvv-kk-pp
 </tr>
 <tr valign='top'>
   <td align='right' bgcolor='#ffeedd'>Järjestäjä</td>
@@ -96,9 +73,10 @@ $forms = <<<FORMSEND
   <td align='right' bgcolor='#ffeedd'>Kuva</td>
   <td><img src='lataaKuva.php?id=$id' ></td>
   <td><input type='file' name='kuva'><td>
+  Huom! Kuvan tulee olla 150x150px
 </tr>
 </table>
-<input type='submit' name='action' value='Tallenna' onclick="javascript: alert('Tallennettu')"><br>
+<input type='submit' name='muokkaa' value='Tallenna'><br>
 <input type='submit' name='poista' value='Poista' onclick="javascript: return confirm('Hyväksy poisto?')">
 </form>
 
