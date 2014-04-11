@@ -1,8 +1,14 @@
 ﻿<?php
 include_once('navbar.php');
 require_once('db-init.php');
-$ostot_taulu[] = array (2,3);
-session_start();
+?>
+<h1>testi</h1>
+<?php
+
+$ostot_taulu[] = array("id" => 1);
+$ostot_taulu[] = array("maara" => 3);
+
+print_r($ostot_taulu);
 $_SESSION['osto'][] = $ostot_taulu;
 ?>
 
