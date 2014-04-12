@@ -12,6 +12,7 @@ require_once('db-init.php');
 <?php
 
 //tarkistaa onko sessio olemassa ja onko siellä mitään
+//sessiossa on taulukko, josta löytyy tapahtumaID ja lippujen määrä (id, maara)
 if(isset($_SESSION['osto']) && !empty($_SESSION['osto'])) {
 echo '<table>';	
     $otsikot = <<<OEND
@@ -28,12 +29,12 @@ echo '<table>';
 OEND;
 echo $otsikot;
 
-
+$yht = 0;
+$tulo = 0;
 	foreach ($_SESSION['osto'] as $tilausrivi) {
 	foreach ($tilausrivi AS	$kentta) {
 	foreach($kentta as $arvo => $diu) {
-	    //echo "diu $arvo: $diu <br>";
-		
+	
 		if($arvo == 'id'){
 
 			$stmt = haeTapahtuma($db, $diu);
@@ -46,7 +47,7 @@ echo $otsikot;
 <td>{$row['kuvaus']}</td>
 <td>{$row['paikka']}</td>
 <td>{$row['lisatiedot']}</td> 
-<td>{$row['lipunhinta']}</td> 
+<td>{$row['lipunhinta']} €</td> 
 LIPPUEND;
 
 //<td>{$row['lippukiintio']}</td>
@@ -55,22 +56,26 @@ echo $lippu;
 		else{
 			$maara = $diu;
 			$tulo = $maara*$hinta;
-			echo "<td>$diu</td><td>$tulo</td></tr>";
-			
+			echo "<td>$diu</td><td>$tulo €</td></tr>";
+			$yht += $tulo;
 		}
 	}
 	}}
+
+echo '<tr><td><b>Yhteensä</b></td><td><b>';
+echo $yht;
+echo ' €</b></td></tr>';
 echo '</table>';
 	naytaNappulat();
 }
-
+//tyhjennetään sessio
 if(isset($_POST['tyhjaa'])){
 	unset ($_SESSION['osto']);
 	header("Location: http://" . $_SERVER['HTTP_HOST']
                            . dirname($_SERVER['PHP_SELF']) . '/'
                            . "ostoskori.php");
 }
-
+//haetaan tapahtuman tiedot
 function haeTapahtuma($db, $diu) {
     $sql = <<<SQLEND
     SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lisatiedot
@@ -96,16 +101,8 @@ function naytaNappulat(){
 <?php
 }
 
-
-
-//GET sessiosta tilattavien lippujen tapahtumien 
-//tunnukset, 
-//lippujen määrä, 
 //(ostorajoitus, jos liikaa lippuja herjaa jotain) jostain pitää tarkistaa riittääkö lippuja
 
 //					 ilmoita asikkaalle tilauksen onnistumisesta
 // tyhjennä sessio, jos tilaus vahvistettu tai ostoskori tyhjennetty
-
-//toiseen tiedostoon -> tiedot saaduista tilauksista tapahtuma pvm mukaan(?), graafi (y)
-
 ?>

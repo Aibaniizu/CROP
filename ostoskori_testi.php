@@ -1,6 +1,7 @@
 ﻿<?php
 include_once('navbar.php');
 require_once('db-init.php');
+//testataan sessiota
 ?>
 <h1>testi</h1>
 <?php

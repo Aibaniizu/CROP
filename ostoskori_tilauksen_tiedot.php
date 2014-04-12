@@ -28,8 +28,8 @@ echo '<table>';
 </tr>  
 OEND;
 echo $otsikot;
-
-
+$yht = 0;
+$tulo = 0;
 	foreach ($_SESSION['osto'] as $tilausrivi) {
 	foreach ($tilausrivi AS	$kentta) {
 	foreach($kentta as $arvo => $diu) {
@@ -47,7 +47,7 @@ echo $otsikot;
 <td>{$row['kuvaus']}</td>
 <td>{$row['paikka']}</td>
 <td>{$row['lisatiedot']}</td> 
-<td>{$row['lipunhinta']}</td> 
+<td>{$row['lipunhinta']} €</td> 
 LIPPUEND;
 
 //<td>{$row['lippukiintio']}</td>
@@ -56,11 +56,15 @@ echo $lippu;
 		else{
 			$maara = $diu;
 			$tulo = $maara*$hinta;
-			echo "<td>$diu</td><td>$tulo</td></tr>";
-			
+			echo "<td>$diu</td><td>$tulo €</td></tr>";
+			$yht += $tulo;
 		}
 	}
 	}}
+
+echo '<tr><td><b>Yhteensä</b></td><td><b>';
+echo $yht;
+echo ' €</b></td></tr>';
 echo '</table>';
 }
 function haeTapahtuma($db, $diu) {
@@ -174,8 +178,6 @@ Lisätietoja tilaukseen liittyen<br>
 
 <?php
 
-
-//					 lomake, josta näkee omat tiedot + toimitustapa, maksutapa, lisätiedot
 //					 hae tilaus pvm
 //					 
 //					 ->tallenna tilaus tietokantaan
