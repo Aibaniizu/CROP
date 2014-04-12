@@ -77,15 +77,8 @@ SQLEND;
 			return $stmt;    
 }
 
-//GET sessiosta tilattavien lippujen tapahtumien 
-//tunnukset, 
-//lippujen määrä, 
-//ostorajoitus, jos liikaa lippuja herjaa jotain
-//vahvista tilaus -> toiseen näkymään
-//					 tallenna tilaus tietokantaan
-//					 ilmoita asikkaalle tilauksen onnistumisesta
-// tyhjennä sessio, jos tilaus vahvistettu tai ostoskori tyhjennetty
 
+//ostorajoitus, jos liikaa lippuja herjaa jotain
 //toiseen tiedostoon -> tiedot saaduista tilauksista tapahtuma pvm mukaan(?), graafi (y)
 
 ?>

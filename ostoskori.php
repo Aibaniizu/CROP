@@ -102,7 +102,4 @@ function naytaNappulat(){
 }
 
 //(ostorajoitus, jos liikaa lippuja herjaa jotain) jostain pitää tarkistaa riittääkö lippuja
-
-//					 ilmoita asikkaalle tilauksen onnistumisesta
-// tyhjennä sessio, jos tilaus vahvistettu tai ostoskori tyhjennetty
 ?>

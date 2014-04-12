@@ -173,15 +173,3 @@ Lisätietoja tilaukseen liittyen<br>
    <form method="POST" action="ostoskori.php">
    <input type="submit" value="Peruuta" name="peruuta">
    </form>
-
-
-
-<?php
-
-//					 hae tilaus pvm
-//					 
-//					 ->tallenna tilaus tietokantaan
-//						->asiakkaan lippuun tilausnro, tapahtumaID
-
-//toiseen tiedostoon -> tiedot saaduista tilauksista tapahtuma pvm mukaan(?), graafi (y)
-?>
