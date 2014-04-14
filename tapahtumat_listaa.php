@@ -1,14 +1,14 @@
 ﻿<style type='text/css'>
-tr:nth-child(odd) {background: #f1f1f1}
+tr:nth-child(odd) {background: #749FA9}
 tr:nth-child(even) {background: #ffffff}
-tr:nth-child(1) {background: #ffeedd}
+tr:nth-child(1) {background: #749FA9}
 </style>
 
 <?php
 // mysql-pdo-search.php
-session_start();
 require_once('db-init.php');
 include_once('navbar.php');
+include_once('navbar_tapahtumat.php');
 
 $hakuehto = isset($_GET['hakuehto']) ? $_GET['hakuehto'] : '';
     
@@ -35,16 +35,9 @@ function haeTapahtumat($db, $hakuehto) {
 		   SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 		   FROM Tapahtuma
 SQLEND;
-	} /*else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
-		$sql = <<<SQLEND
-			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
-			FROM Tapahtuma WHERE tapahtumaID
-			LIKE :hakuehto 
-			ORDER BY tapahtumaID ASC
-SQLEND;
+	} 
 	
-	
-	}*/ else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
+	else if(isset($_GET['jarjestys']) && $_GET['jarjestys'] == 'TapahtumaID') {
 		$sql = <<<SQLEND
 			SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, kuva, lisatiedot
 			FROM Tapahtuma
@@ -102,7 +95,6 @@ function sqlResult2Html($stmt) {
 	$row_count = $stmt->rowCount();
 	$col_count  = $stmt->columnCount();
 
-	echo "Hakutulokset:" . $row_count. " riviä:<hr>\n";
 	echo "<table border='0'>\n";    
 	// yläpalkki
 	if ($taso >= 2) {
@@ -160,7 +152,6 @@ OUTPUTEND;
 	
 }
 echo "</table>\n";
-echo $_SESSION['taso'];
 }
 
 ?>
