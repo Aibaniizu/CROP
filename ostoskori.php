@@ -68,6 +68,8 @@ echo ' €</b></td></tr>';
 echo '</table>';
 	naytaNappulat();
 }
+else{echo 'Ostoskorisi on tyhjä';}
+
 //tyhjennetään sessio
 if(isset($_POST['tyhjaa'])){
 	unset ($_SESSION['osto']);
