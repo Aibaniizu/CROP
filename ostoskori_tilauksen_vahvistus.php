@@ -4,7 +4,7 @@ require_once('db-init.php');
 ?>
 <h1>Tilauksen vahvistus</h1>
 <?php
-if(isset($_POST['vahvista']) && isset($_SESSION['osto']) && !empty($_SESSION['osto'])){
+if(isset($_POST['vahvista']) && isset($_SESSION['osto']) && !empty($_SESSION['osto']) && $_POST['maksutapa'] != 'ei valittu' && $_POST['toimitustapa'] != 'ei valittu'){
 
 //get date
 $pvm = date('Y-m-d');
@@ -76,9 +76,5 @@ SQLEND;
 			$stmt->execute();
 			return $stmt;    
 }
-
-
-//ostorajoitus, jos liikaa lippuja herjaa jotain
-//toiseen tiedostoon -> tiedot saaduista tilauksista tapahtuma pvm mukaan(?), graafi (y)
 
 ?>

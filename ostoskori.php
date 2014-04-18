@@ -31,6 +31,9 @@ echo $otsikot;
 
 $yht = 0;
 $tulo = 0;
+$kiintio = 0;
+$max_maara = 0;
+$tapahtumaID;
 	foreach ($_SESSION['osto'] as $tilausrivi) {
 	foreach ($tilausrivi AS	$kentta) {
 	foreach($kentta as $arvo => $diu) {
@@ -49,15 +52,29 @@ $tulo = 0;
 <td>{$row['lisatiedot']}</td> 
 <td>{$row['lipunhinta']} €</td> 
 LIPPUEND;
+$kiintio = $row['lippukiintio'];
+$max_maara = $row['lippuostorajoitus'];
+$tapahtumaID = $diu;
 
-//<td>{$row['lippukiintio']}</td>
 echo $lippu;			
 		}
 		else{
 			$maara = $diu;
+			
+			//$stmt = haeLippu($db, $tapahtumaID);
+			//$row=$stmt->fetch(PDO::FETCH_ASSOC);
+
 			$tulo = $maara*$hinta;
 			echo "<td>$diu</td><td>$tulo €</td></tr>";
 			$yht += $tulo;
+			
+			if($maara > $max_maara){
+			unset ($_SESSION['osto']);
+				//unset($_SESSION['osto'][$tilausrivi]);
+				header("Location: http://" . $_SERVER['HTTP_HOST']
+                           . dirname($_SERVER['PHP_SELF']) . '/'
+                           . "ostoskori.php");
+			}
 		}
 	}
 	}}
@@ -80,7 +97,7 @@ if(isset($_POST['tyhjaa'])){
 //haetaan tapahtuman tiedot
 function haeTapahtuma($db, $diu) {
     $sql = <<<SQLEND
-    SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lisatiedot
+    SELECT tapahtumaID, nimi, ajankohta, jarjestaja, kuvaus, paikka, lipunhinta, lippukiintio, lippuostorajoitus, lisatiedot
     FROM Tapahtuma WHERE tapahtumaID=:diu
 SQLEND;
  
