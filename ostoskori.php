@@ -149,6 +149,4 @@ function naytaNappulat(){
 
 <?php
 }
-
-//(ostorajoitus, jos liikaa lippuja herjaa jotain) jostain pitää tarkistaa riittääkö lippuja
 ?>
