@@ -11,6 +11,16 @@ require_once('db-init.php');
 <h1>Ostoskori</h1>
 <?php
 
+if(!isset($_SESSION['liikaa'])){
+$_SESSION['liikaa'] = 'tyhja';
+}
+
+//ilmoitus jos lippuja yritetty tilata liikaa
+if($_SESSION['liikaa'] == 'liikaa') {
+echo "<script type='text/javascript'>alert('Ostoskorisi jouduttiin tyhjentämään, koska emme voi tarjota haluamaasi määrää lippuja :(');</script>";
+unset ($_SESSION['liikaa']);
+}
+
 //tarkistaa onko sessio olemassa ja onko siellä mitään
 //sessiossa on taulukko, josta löytyy tapahtumaID ja lippujen määrä (id, maara)
 if(isset($_SESSION['osto']) && !empty($_SESSION['osto'])) {
@@ -60,17 +70,22 @@ echo $lippu;
 		}
 		else{
 			$maara = $diu;
+			$i = 0;
+			$stmt = haeLippu($db, $tapahtumaID);
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
 			
-			//$stmt = haeLippu($db, $tapahtumaID);
-			//$row=$stmt->fetch(PDO::FETCH_ASSOC);
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$i++;
+			}
+			$jaljella = $kiintio-$i;
 
 			$tulo = $maara*$hinta;
 			echo "<td>$diu</td><td>$tulo €</td></tr>";
 			$yht += $tulo;
 			
-			if($maara > $max_maara){
+			if($maara > $max_maara || $jaljella <= $maara){
 			unset ($_SESSION['osto']);
-				//unset($_SESSION['osto'][$tilausrivi]);
+			$_SESSION['liikaa'] = 'liikaa';
 				header("Location: http://" . $_SERVER['HTTP_HOST']
                            . dirname($_SERVER['PHP_SELF']) . '/'
                            . "ostoskori.php");
@@ -106,6 +121,21 @@ SQLEND;
 			$stmt->execute();
 			return $stmt;    
 }
+
+//haetaan liput
+function haeLippu($db, $tapahtuma) {
+    $sql = <<<SQLEND
+    SELECT LippuNro
+    FROM Asiakkaan_lippu WHERE tapahtumaID=:tapahtuma
+SQLEND;
+ 
+			$stmt = $db->prepare("$sql");
+			$stmt->bindValue(':tapahtuma', "$tapahtuma", PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt;    
+}
+
+
 //napit näkyviin jos ostoskorissa on jotakin
 function naytaNappulat(){
 ?>
